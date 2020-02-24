@@ -23,7 +23,7 @@ typedef unsigned short  uint16_t;
 typedef int  int32_t;
 typedef unsigned   uint32_t;
 
-#define HASHPOWER_DEFAULT 16
+#define HASHPOWER_DEFAULT 27
 #define HASHPOWER_MAX 32
 
 #define bool char

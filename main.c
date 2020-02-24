@@ -9,7 +9,7 @@
 #define BUF_LEN 30
 #define ITEM_LEN (sizeof(item)+BUF_LEN)
 #define ITEMADDR(i) ((item *)(itemlist+i*ITEM_LEN))
-#define THREAD_NUM 4
+#define THREAD_NUM 16
 void * itemlist;
 static uint64_t curr_items;
 

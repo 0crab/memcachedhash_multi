@@ -325,8 +325,12 @@ bool my_memcached_set(u_int32_t hv,item * new_it){
     int ret;
     item *it =assoc_find(ITEM_key(new_it),8,hv);
     if(it==NULL){
+//	STATS_LOCK();
+//	STATS_UNLOCK();
         ret=assoc_insert(new_it,hv);
     }else{
+//	STATS_LOCK();
+//	STATS_UNLOCK();
         assoc_delete(ITEM_key(new_it),8,hv);
         assoc_insert(new_it,hv);
         ret=1;
