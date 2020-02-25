@@ -58,7 +58,7 @@ int main(){
     //item_lock_init();
     assoc_init(27);//set number of bucket to 2^27
     //start_assoc_maintenance_thread();
-    item_lock_init();
+    item_lock_init(THREAD_NUM);
 
     gettimeofday(&t1,NULL);
     pthread_t pid[THREAD_NUM];

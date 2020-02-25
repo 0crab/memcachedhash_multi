@@ -1,9 +1,5 @@
 多线程多次使用“set”插入memcached底层哈希表测试
 
-```
-gcc -std=c99 main.c assoc.c jenkins_hash.c my_memcached.c -lpthread
-```
-
 set方法包含delete和insert。直接对整个item进行操作。并且在每次set前都要上锁。
 
 ---

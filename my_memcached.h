@@ -195,7 +195,7 @@ void *item_trylock(uint32_t hv);
 void item_trylock_unlock(void *lock);
 void item_unlock(uint32_t hv);
 
-void item_lock_init();
+void item_lock_init(int nthreads);
 
 void STATS_LOCK();
 void STATS_UNLOCK();

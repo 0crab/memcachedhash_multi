@@ -12,7 +12,7 @@ typedef  uint32_t  ub4;
 
 
 
-void item_lock_init(){
+void item_lock_init(int nthreads){
     item_locks = calloc(item_lock_count, sizeof(pthread_mutex_t));
     if (! item_locks) {
         perror("Can't allocate item locks");
@@ -21,9 +21,30 @@ void item_lock_init(){
     for (int i = 0; i < item_lock_count; i++) {
         pthread_mutex_init(&item_locks[i], NULL);
     }
-    item_lock_count = hashsize(10);
-    item_lock_hashpower = 10;
+    int power;
+    if (nthreads < 3) {
+        power = 10;
+    } else if (nthreads < 4) {
+        power = 11;
+    } else if (nthreads < 5) {
+        power = 12;
+    } else if (nthreads <= 10) {
+        power = 13;
+    } else if (nthreads <= 20) {
+        power = 14;
+    } else {
+        /* 32k buckets. just under the hashpower default. */
+        power = 15;
+    }
+
+    item_lock_count = hashsize(power);
+    item_lock_hashpower = power;
     item_locks = calloc(item_lock_count, sizeof(pthread_mutex_t));
+
+    for (int i = 0; i < item_lock_count; i++) {
+        pthread_mutex_init(&item_locks[i], NULL);
+    }
+
 }
 
 void item_lock(uint32_t hv) {
